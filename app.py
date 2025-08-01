@@ -4,11 +4,13 @@ import numpy as np
 import librosa
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import musicbrainzngs
 
 st.set_page_config(page_title="Music Analyzer", layout="centered")
 st.title("🎶 Music Analyzer")
+musicbrainzngs.set_useragent("MusicAnalyzer", "1.0")
 
-source = st.sidebar.selectbox("Select input source", ["Spotify Track", "Upload Audio File"])
+source = st.sidebar.selectbox("Select input source", ["Spotify Track", "MusicBrainz Recording", "Upload Audio File"])
 
 if source == "Spotify Track":
     spotify_url = st.text_input("Enter Spotify track URL or ID")
@@ -35,6 +37,22 @@ if source == "Spotify Track":
             st.error(f"Error fetching data: {e}")
     else:
         st.info("Provide track URL/ID and set Spotify credentials in environment variables.")
+elif source == "MusicBrainz Recording":
+    mbid = st.text_input("Enter MusicBrainz recording ID")
+    if mbid:
+        try:
+            rec = musicbrainzngs.get_recording_by_id(mbid, includes=["artists", "releases"])
+            info = rec["recording"]
+            title = info.get("title", "")
+            artist = info.get("artist-credit", [{}])[0].get("artist", {}).get("name", "")
+            release = info.get("releases", [{}])[0].get("title", "N/A") if info.get("releases") else "N/A"
+            st.subheader(f"{title} - {artist}")
+            st.write(f"Release: {release}")
+            if "length" in info:
+                length_sec = int(info["length"]) / 1000.0
+                st.write(f"Length: {length_sec:.2f} sec")
+        except Exception as e:
+            st.error(f"Error fetching data: {e}")
 else:
     uploaded = st.file_uploader("Upload MP3/WAV", type=["mp3","wav"])
     if uploaded is not None:

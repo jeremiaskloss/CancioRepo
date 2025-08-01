@@ -7,8 +7,10 @@ Permite obtener tempo (BPM), tonalidad, energía, valence y danceability desde S
 ## Cómo usar
 
 1. Desplegar en [Streamlit Cloud](https://streamlit.io/cloud) o correr `streamlit run app.py`.
-2. Establecer variables de entorno `SPOTIPY_CLIENT_ID` y `SPOTIPY_CLIENT_SECRET` para usar la opción de Spotify.
-3. Subir un archivo de audio o ingresar la URL/ID de un tema de Spotify.
+2. Establecer variables de entorno `SPOTIPY_CLIENT_ID` y `SPOTIPY_CLIENT_SECRET` si vas a analizar canciones de Spotify.
+3. Seleccionar la fuente en la barra lateral: Spotify, MusicBrainz o archivo de audio local.
+4. Introduce la URL/ID de la canción o sube el archivo a analizar.
+5. Para la opción MusicBrainz, ingresa el ID de grabación (MBID) y se mostrarán sus metadatos.
 
 ## Despliegue en GitHub y Streamlit
 
