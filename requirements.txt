@@ -1,2 +1,5 @@
 streamlit
-pandas
+librosa
+spotipy
+numpy
+musicbrainzngs
