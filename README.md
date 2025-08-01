@@ -12,8 +12,18 @@ Permite obtener tempo (BPM), tonalidad, energía, valence y danceability desde S
 
 ## Despliegue en GitHub y Streamlit
 
-1. Crea un repositorio en GitHub y sube estos archivos con `git init`, `git add .` y `git commit`.
-2. Agrega el remoto con `git remote add origin <URL-repo>` y ejecuta `git push -u origin main`.
+1. Crea un repositorio en GitHub.
+2. Desde tu terminal ejecuta:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin <URL-repo>
+git push -u origin main
+```
+
 3. En Streamlit Cloud, selecciona el repositorio público y el archivo `app.py` para lanzar la aplicación.
 
 ---
