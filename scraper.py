@@ -12,7 +12,7 @@ def search_song(query: str):
     if not q:
         return []
     try:
-        response = requests.get(f"{BASE_URL}/", params={"q": q}, headers=HEADERS, timeout=10)
+        response = requests.get(f"{BASE_URL}/busca/", params={"q": q}, headers=HEADERS, timeout=10)
         response.raise_for_status()
     except requests.RequestException:
         return []
