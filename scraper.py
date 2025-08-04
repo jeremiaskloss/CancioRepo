@@ -36,8 +36,19 @@ def fetch_song(url: str):
         response.raise_for_status()
     except requests.RequestException:
         return None
+
     soup = BeautifulSoup(response.text, "html.parser")
-    pre = soup.find("pre")
-    if not pre:
+
+    # Most songs use a ``<pre>`` block, but others rely on ``<div class="cifra_cnt">``
+    # or custom elements. Try several selectors before giving up so a wider range
+    # of layouts can be parsed.
+    container = soup.find("pre")
+    if not container:
+        container = soup.find("div", class_="cifra_cnt")
+    if not container:
+        # Fall back to any element whose class includes "cifra"
+        container = soup.find(attrs={"class": lambda c: c and "cifra" in c})
+    if not container:
         return None
-    return pre.get_text("\n", strip=False)
+
+    return container.get_text("\n", strip=False)
