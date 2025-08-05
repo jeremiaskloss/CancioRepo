@@ -38,3 +38,12 @@ def test_fetch_song_preserves_alignment(monkeypatch):
     monkeypatch.setattr(requests, "get", fake_get)
     content = fetch_song("http://example.com/song")
     assert content == "C      G\nLetra de prueba"
+
+
+def test_fetch_song_fallback_cifra_class(monkeypatch):
+    def fake_get(url, headers=None, timeout=None):
+        html = '<span class="cifra-blah">C F G<br>Letra de prueba</span>'
+        return SimpleNamespace(text=html, raise_for_status=lambda: None)
+    monkeypatch.setattr(requests, "get", fake_get)
+    content = fetch_song("http://example.com/custom_layout")
+    assert content == "C F G\nLetra de prueba"
