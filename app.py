@@ -18,15 +18,21 @@ else:
                 results = []
                 st.error(f"Ocurrió un error al buscar: {e}")
         if results:
+            placeholder = "Selecciona una canción"
             options = {title: url for title, url in results}
-            choice = st.selectbox("Resultados de búsqueda", list(options.keys()))
-            if choice:
+            choice = st.radio(
+                "Resultados de búsqueda",
+                [placeholder] + list(options.keys()),
+            )
+            if choice != placeholder:
                 song_url = options[choice]
                 with st.spinner("Descargando letra y acordes..."):
                     try:
                         text = get_song_chords(song_url)
                         st.text_area("Letra con acordes", text, height=400)
-                        st.download_button("Descargar como .txt", data=text, file_name="cancion.txt")
+                        st.download_button(
+                            "Descargar como .txt", data=text, file_name="cancion.txt"
+                        )
                     except Exception as e:
                         st.error(f"No fue posible obtener la canción: {e}")
         else:
