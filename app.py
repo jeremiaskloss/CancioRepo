@@ -18,11 +18,15 @@ else:
         else:
             titulos = [r["title"] for r in resultados]
             elegido = st.selectbox("Resultados de búsqueda", titulos)
-            url = resultados[titulos.index(elegido)]["url"]
+            detalles = resultados[titulos.index(elegido)]
+            st.write("Información disponible del resultado seleccionado:")
+            st.json(detalles)
             if st.button("Mostrar acordes y letra"):
-                contenido = fetch_song(url)
+                contenido = fetch_song(detalles["url"])
                 if not contenido:
                     st.error("No se pudo obtener el contenido de la canción.")
                 else:
+                    st.markdown(f"### {detalles['title']}")
+                    st.markdown(f"[Ver en CifraClub]({detalles['url']})")
                     st.markdown(f"<pre>{contenido}</pre>", unsafe_allow_html=True)
                     st.download_button("Descargar como TXT", contenido, file_name="cancion.txt")

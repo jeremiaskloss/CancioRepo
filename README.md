@@ -13,7 +13,7 @@ obteniendo letra y acordes con el formato original (acordes alineados sobre la l
    ```bash
    streamlit run app.py
    ```
-3. Ingresá el nombre de la canción, elegí el resultado correcto y consultá la letra con acordes.
+3. Ingresá el nombre de la canción, elegí el resultado correcto y consultá la letra con acordes. La aplicación muestra toda la información disponible del resultado (p. ej., título y URL) antes de desplegar los acordes.
 
 Las búsquedas normalizan el texto (p. ej., eliminando acentos) para mejorar la compatibilidad con CifraClub.
 
