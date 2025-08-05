@@ -1,32 +1,23 @@
-# Music Analyzer 🎶
+# Análisis Armónico de Canciones 🎶
 
-Herramienta para analizar características musicales de una canción.
+Aplicación en [Streamlit](https://streamlit.io/) para buscar canciones en [CifraClub](https://www.cifraclub.com.br), obtener su letra y acordes y mostrarlos manteniendo el formato original.
 
-Permite obtener tempo (BPM), tonalidad, energía, valence y danceability desde Spotify o analizando archivos MP3/WAV de forma local.
+## Requisitos
+- Python 3.10+
+- Dependencias listadas en `requirements.txt`
 
-## Cómo usar
-
-1. Desplegar en [Streamlit Cloud](https://streamlit.io/cloud) o correr `streamlit run app.py`.
-2. Establecer variables de entorno `SPOTIPY_CLIENT_ID` y `SPOTIPY_CLIENT_SECRET` si vas a analizar canciones de Spotify.
-3. Seleccionar la fuente en la barra lateral: Spotify, MusicBrainz o archivo de audio local.
-4. Introduce la URL/ID de la canción o sube el archivo a analizar.
-5. Para la opción MusicBrainz, ingresa el ID de grabación (MBID) y se mostrarán sus metadatos.
-
-## Despliegue en GitHub y Streamlit
-
-1. Crea un repositorio en GitHub.
-2. Desde tu terminal ejecuta:
+Instálalas con:
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin <URL-repo>
-git push -u origin main
+pip install -r requirements.txt
 ```
 
-3. En Streamlit Cloud, selecciona el repositorio público y el archivo `app.py` para lanzar la aplicación.
+## Uso
 
----
-Creado con ❤️ usando ChatGPT
+```bash
+streamlit run app.py
+```
+
+En la interfaz elige **Buscar canción**, ingresa el nombre y selecciona el resultado correcto. Se mostrarán los acordes y la letra alineados como en CifraClub y podrás descargar el texto.
+
+La opción de subir audio se encuentra deshabilitada por el momento.
