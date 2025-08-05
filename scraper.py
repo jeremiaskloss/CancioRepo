@@ -41,7 +41,17 @@ def search_song(query: str):
 
 
 def fetch_song(url: str):
-    """Return chord sheet from a CifraClub song url preserving formatting."""
+    """Fetch chord sheet from a CifraClub song page.
+
+    Tries several selectors in order to locate the chord/lyric block:
+
+    1. ``<pre>``
+    2. ``<div class="cifra_cnt">``
+    3. any element whose ``class`` contains ``"cifra"``
+
+    Returns the extracted text with chords aligned above lyrics, or
+    ``None`` if the request fails or none of the selectors are found.
+    """
     try:
         response = requests.get(url, headers=HEADERS, timeout=10)
         response.raise_for_status()
