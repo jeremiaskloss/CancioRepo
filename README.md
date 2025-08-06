@@ -1,20 +1,17 @@
-# Análisis Armónico de Canciones 🎶
+# CifraClub CLI
 
-Aplicación en Streamlit que busca canciones en [CifraClub](https://www.cifraclub.com.br/),
-obteniendo letra y acordes con el formato original (acordes alineados sobre la letra).
+Interfaz de línea de comandos para buscar canciones en [CifraClub](https://www.cifraclub.com.br/) y ver la letra con acordes sin abrir el navegador.
 
-## Cómo usar
+## Uso
 
 1. Instalar dependencias:
    ```bash
    pip install -r requirements.txt
    ```
-2. Ejecutar la app:
+2. Ejecutar la herramienta:
    ```bash
-   streamlit run app.py
+   python cli.py
    ```
-3. Ingresá el nombre de la canción, elegí el resultado correcto y consultá la letra con acordes.
+3. Ingresá el nombre de la canción, elegí un resultado y se mostrará la letra con los acordes.
 
-La opción para subir audio aún no está disponible.
-
-El código de scraping se encuentra en `scraper.py`.
+La herramienta realiza scraping del sitio, por lo que el formato puede variar según la página.
