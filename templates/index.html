@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Buscar en CifraClub</title>
+</head>
+<body>
+    <h1>Buscar canciones</h1>
+    <form method="post">
+        <input type="text" name="q" value="{{ query }}" placeholder="Nombre de la canción" required>
+        <button type="submit">Buscar</button>
+    </form>
+    {% if results %}
+    <ul>
+        {% for item in results %}
+        <li><a href="{{ url_for('song', url=item.url, title=item.title) }}">{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% elif query %}
+    <p>No se encontraron resultados.</p>
+    {% endif %}
+</body>
+</html>

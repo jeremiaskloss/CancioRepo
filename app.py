@@ -1,28 +1,32 @@
-import streamlit as st
-from scraper import search_song, fetch_song
+from __future__ import annotations
 
-st.set_page_config(page_title="Análisis Armónico de Canciones", layout="centered")
+from flask import Flask, request, render_template
 
-st.title("🎵 Análisis Armónico de Canciones")
+from cifraclub import search_songs, fetch_song
 
-opcion = st.radio("Elegí una opción:", ["Subir audio (próximamente)", "Buscar canción"], index=1)
+app = Flask(__name__)
 
-if opcion.startswith("Subir"):
-    st.info("La subida de audio aún no está disponible.")
-else:
-    consulta = st.text_input("Ingresá nombre de canción o artista")
-    if consulta:
-        resultados = search_song(consulta)
-        if not resultados:
-            st.warning("No se encontraron coincidencias.")
-        else:
-            titulos = [r["title"] for r in resultados]
-            elegido = st.selectbox("Resultados de búsqueda", titulos)
-            url = resultados[titulos.index(elegido)]["url"]
-            if st.button("Mostrar acordes y letra"):
-                contenido = fetch_song(url)
-                if not contenido:
-                    st.error("No se pudo obtener el contenido de la canción.")
-                else:
-                    st.markdown(f"<pre>{contenido}</pre>", unsafe_allow_html=True)
-                    st.download_button("Descargar como TXT", contenido, file_name="cancion.txt")
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    query = ''
+    results = []
+    if request.method == 'POST':
+        query = request.form.get('q', '').strip()
+        if query:
+            results = search_songs(query)
+    return render_template('index.html', query=query, results=results)
+
+
+@app.route('/song')
+def song():
+    url = request.args.get('url')
+    title = request.args.get('title', 'Canción')
+    chords = None
+    if url:
+        chords = fetch_song(url)
+    return render_template('song.html', title=title, chords=chords)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
