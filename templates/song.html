@@ -6,7 +6,9 @@
 </head>
 <body>
     <h1>{{ title }}</h1>
-    {% if chords %}
+    {% if error %}
+    <p>{{ error }}</p>
+    {% elif chords %}
     <pre>{{ chords }}</pre>
     {% else %}
     <p>No se pudo obtener la canción.</p>
