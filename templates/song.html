@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% elif chords %}
+    <pre>{{ chords }}</pre>
+    {% else %}
+    <p>No se pudo obtener la canción.</p>
+    {% endif %}
+    <p><a href="{{ url_for('index') }}">Volver</a></p>
+</body>
+</html>
