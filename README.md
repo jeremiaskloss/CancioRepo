@@ -1,14 +1,30 @@
 # CifraClub CLI
 
-Interfaz de línea de comandos para buscar canciones y mostrar sus acordes desde [CifraClub](https://www.cifraclub.com.br) sin necesidad de abrir el navegador.
+Interfaz de línea de comandos para buscar canciones y mostrar sus acordes desde [CifraClub](https://www.cifraclub.com.br) sin abrir el navegador.
+
+## Requisitos
+
+- Python 3.9+
+- Dependencias del archivo `requirements.txt`
+
+Instala dependencias con:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Uso
 
 ```bash
-pip install -r requirements.txt
-python cifraclub_cli.py "nombre de la canción"
+python cifraclub_cli.py "legiao urbana" --limit 5
 ```
 
-El programa listará los primeros resultados; al elegir uno mostrará los acordes en la terminal.
+El programa mostrará los primeros resultados, su URL y permitirá elegir uno para imprimir la cifra en la terminal. Si no proporcionas términos de búsqueda, se solicitarán por consola.
 
-> **Nota:** El sitio puede bloquear solicitudes automatizadas; en ese caso la herramienta mostrará un error al conectar.
+## Pruebas
+
+Ejecuta las pruebas unitarias con:
+
+```bash
+python -m pytest
+```
